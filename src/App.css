@@ -1,0 +1,22 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.team {
+  margin: 0px 0 20px;
+}
+
+label {
+  margin: 10px;
+}
+label input {
+  margin-left: 10px;
+}
+h1 {
+  text-align:center;
+}
+h3 * {
+  margin-left: 30px;
+}
