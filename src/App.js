@@ -14,15 +14,18 @@ function App() {
   ]
     
   const [teamList, setTeamList] = useState(listOfTeamMembers)
+
   const [formData, setFormData] = useState({})
+
+  const [memberToEdit, setMemberToEdit] = useState({})
 
   return (
     <div className="App">
       <h1>Imperial Database!</h1>
       <div className="team">
-        {teamList.map(member => <h3 key={member.id}><span>{`Name: ${member.name}`}</span><span>{`Email: ${member.email}`}</span><span>{`Role: ${member.role}`}</span>{/*<button>Edit</button>*/}</h3>)}
+        {teamList.map(member => <h3 key={member.id}><span>{`Name: ${member.name}`}</span><span>{`Email: ${member.email}`}</span><span>{`Role: ${member.role}`}</span><button onClick={() => setMemberToEdit(member)}>Edit</button></h3>)}
       </div>
-      <Form formData={formData} setFormData={setFormData} teamList={teamList} setTeamList={setTeamList}/>
+      <Form formData={formData} setFormData={setFormData} teamList={teamList} setTeamList={setTeamList} memberToEdit={memberToEdit}/>
     </div>
   );
 }

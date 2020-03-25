@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { v4 as uuid } from 'uuid'
 
-const Form = ({formData, setFormData, teamList, setTeamList}) => {
+const Form = ({formData, setFormData, teamList, setTeamList, memberToEdit}) => {
     
     const updateForm = event => {
         setFormData({...formData, [event.target.name]: event.target.value})
@@ -18,6 +18,13 @@ const Form = ({formData, setFormData, teamList, setTeamList}) => {
         setTeamList([...teamList, newMember])
         console.log(teamList)
     }
+
+    useEffect(() => {
+        if (memberToEdit){
+            setFormData(memberToEdit)
+        }
+
+    }, [memberToEdit])
 
     return (
         <form onSubmit={addPerson}>
