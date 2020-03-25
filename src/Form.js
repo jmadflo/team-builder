@@ -1,22 +1,27 @@
 import React, { useEffect } from 'react'
 import { v4 as uuid } from 'uuid'
 
-const Form = ({formData, setFormData, teamList, setTeamList, memberToEdit}) => {
+const Form = ({formData, setFormData, teamList, setTeamList, memberToEdit, editMember}) => {
     
     const updateForm = event => {
         setFormData({...formData, [event.target.name]: event.target.value})
-        console.log(formData)
+        // console.log(formData)
     }
-    const addPerson = event => {
-        event.preventDefault()
-        const newMember = {
-            id: uuid(),
-            name: formData.name,
-            email: formData.email,
-            role: formData.role
+    const amendFriends = event => {
+        if (memberToEdit) {
+            editMember()
+        } else {
+            event.preventDefault()
+            const newMember = {
+                id: uuid(),
+                name: formData.name,
+                email: formData.email,
+                role: formData.role
+            }
+            setTeamList([...teamList, newMember])
+            console.log(teamList)
         }
-        setTeamList([...teamList, newMember])
-        console.log(teamList)
+        
     }
 
     useEffect(() => {
@@ -27,7 +32,7 @@ const Form = ({formData, setFormData, teamList, setTeamList, memberToEdit}) => {
     }, [memberToEdit])
 
     return (
-        <form onSubmit={addPerson}>
+        <form onSubmit={amendFriends}>
             <label>
                 Name:
                 <input name="name" type="text" value={formData.name || ""} onChange={updateForm}/>

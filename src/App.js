@@ -15,9 +15,26 @@ function App() {
     
   const [teamList, setTeamList] = useState(listOfTeamMembers)
 
-  const [formData, setFormData] = useState({})
+  const [formData, setFormData] = useState({name: '', email: '', role: ''})
 
-  const [memberToEdit, setMemberToEdit] = useState({})
+  const [memberToEdit, setMemberToEdit] = useState(null)
+
+  const editMember = () => {
+    const newItem = teamList.map((member, index)=> {
+      if (memberToEdit.id === member.id){
+        member.name = formData.name
+        member.email = formData.email
+        member.role = formData.role
+        return [member, index]
+      }
+    })
+
+    let newList = [...teamList]
+    newList[newItem[1]] = newItem[0]
+    setTeamList(newList)
+    
+    setMemberToEdit(null)
+  }
 
   return (
     <div className="App">
@@ -25,7 +42,7 @@ function App() {
       <div className="team">
         {teamList.map(member => <h3 key={member.id}><span>{`Name: ${member.name}`}</span><span>{`Email: ${member.email}`}</span><span>{`Role: ${member.role}`}</span><button onClick={() => setMemberToEdit(member)}>Edit</button></h3>)}
       </div>
-      <Form formData={formData} setFormData={setFormData} teamList={teamList} setTeamList={setTeamList} memberToEdit={memberToEdit}/>
+      <Form formData={formData} setFormData={setFormData} teamList={teamList} setTeamList={setTeamList} memberToEdit={memberToEdit} editMember={editMember}/>
     </div>
   );
 }
